@@ -20,6 +20,12 @@
   </head>
   <body>
     <canvas width="720" height="720" id="game"></canvas>
+    <div id="mobile-controls">
+      <button id="move-left">Left</button>
+      <button id="move-right">Right</button>
+      <button id="move-up">Up</button>
+      <button id="move-down">Down</button>
+    </div>
     <script>
       const canvas = document.getElementById("game");
       const context = canvas.getContext("2d");
@@ -34,7 +40,7 @@
       }
       Sprite.prototype.render = function () {
         // draw an image sprite
-        context.drawImage(this.image, this.x, this.y, this.size, this.size);
+        context.drawImage(this.image, this.x, this.y, this.size, 48);
       };
 
       const froggerImage = new Image();
@@ -376,6 +382,31 @@
           canvas.height - grid * 2
         );
       });
+
+      // =====================================
+      // Event listeners for mobile movement controls
+      document
+        .getElementById("move-left")
+        .addEventListener("click", function () {
+          frogger.x -= grid;
+        });
+
+      document
+        .getElementById("move-right")
+        .addEventListener("click", function () {
+          frogger.x += grid;
+        });
+
+      document.getElementById("move-up").addEventListener("click", function () {
+        frogger.y -= grid;
+      });
+
+      document
+        .getElementById("move-down")
+        .addEventListener("click", function () {
+          frogger.y += grid;
+        });
+      // =====================================
 
       // start the game
       requestAnimationFrame(loop);
